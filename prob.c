@@ -1,20 +1,24 @@
 #include <stdio.h>
-#include <unistd.h>
+#include <string.h>
 #include <stdlib.h>
 
 void win() {
-    printf("You win!\n");
     system("/bin/sh");
+    puts("You Win!");
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
 
-    char buf[64];
+    printf("Welcome! Try to exploit the buffer overflow.\n");
+    printf("Address of win() function: %p\n", win);
+
+    char buffer[64];
 
     printf("Input: ");
-
-    gets(buf);
+    gets(buffer);
 
     return 0;
 }
